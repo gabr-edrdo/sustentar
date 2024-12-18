@@ -13,7 +13,7 @@ class Estacao
     public function getAll(): array|bool
     {
         try {
-            $stmt = $this->pdo->query("SELECT id, endereco, latitude, longitude, api_token, created_at, updated_at FROM estacoes");
+            $stmt = $this->pdo->query("SELECT id, endereco, latitude, longitude, created_at, updated_at FROM estacoes");
             return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: false;
         } catch (PDOException $e) {
             throw new Exception("Erro ao buscar estações: " . $e->getMessage());
@@ -24,7 +24,7 @@ class Estacao
     public function getById(int $id): array|bool
     {
         try {
-            $stmt = $this->pdo->prepare("SELECT id, endereco, latitude, longitude, api_token, created_at, updated_at FROM estacoes WHERE id = ?");
+            $stmt = $this->pdo->prepare("SELECT id, endereco, latitude, longitude, created_at, updated_at FROM estacoes WHERE id = ?");
             $stmt->execute([$id]);
             return $stmt->fetch(PDO::FETCH_ASSOC) ?: false;
         } catch (PDOException $e) {
